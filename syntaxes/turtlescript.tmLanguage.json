@@ -1,0 +1,105 @@
+{
+    "scopeName": "source.turtlescript",
+    "patterns": [
+        { "include": "#comment" },
+        {
+            "name": "meta.function",
+            "begin": "\\b(path|calculation)\\b",
+            "end": "\\b(endpath|endcalc)\\b",
+            "beginCaptures": {
+                "1": {
+                    "name": "storage.type"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "storage.type"
+                }
+            },
+            "patterns": [
+                {
+                    "name": "keyword.control",
+                    "match": "\\breturns\\b"
+                },
+                {"include": "#statement"}
+            ]
+        },
+        {
+            "begin": "\\b(begin)\\b",
+            "end": "\\b(end)\\b",
+            "name": "meta.block",
+            "captures": {
+                "0": {
+                    "name": "keyword.control"
+                }
+            },
+            "patterns": [
+                {"include": "#statement"}
+            ]
+        }
+    ],
+    "repository": {
+        "statement": {
+            "patterns": [
+                {"include": "#comment"},
+                {"include": "#function"},
+                {"include": "#command"},
+                {"include": "#modifier"},
+                {"include": "#control"},
+                {"include": "#predefined-var"},
+                {"include": "#global-var"},
+                {"include": "#local-var"},
+                {"include": "#number"}
+            ]
+        },
+        "comment": {
+            "match": "^\\\".*$",
+            "name": "comment.line.character"
+        },
+        "function": {
+            "name": "meta.function",
+            "begin": "\\b([a-zA-Z@_][a-zA-Z0-9_@]*)\\(",
+            "end": "\\)",
+            "beginCaptures": {
+                "0": {
+                    "name": "entity.name.function"
+                }
+            },
+            "patterns": [
+                {"include": "#function"},
+                {"include": "#predefined-var"},
+                {"include": "#global-var"},
+                {"include": "#local-var"},
+                {"include": "#number"}
+            ]
+        },
+        "command": {
+            "match": "\\b(walk|back|jump|turn|path|direction|add|sub|div|mul|store|color)\\b",
+            "name": "storage.type"
+        },
+        "modifier": {
+            "match": "\\b(back|home|mark|left|right|step|by|to|from|stop|in)\\b",
+            "name": "storage.modifier"
+        },
+        "control": {
+            "match": "\\b(do|times|while|until|done|counter|if|then|else|endif)\\b",
+            "name": "keyword.control"
+        },
+        "predefined-var": {
+            "match": "@(dir|x|y|dist|pi|max_x|max_y|delay|green|red|blue|[1-9])\\b",
+            "name": "constant.language"
+        },
+        "global-var": {
+            "match": "@[a-zA-Z0-9_@]+",
+            "name": "variable.other.constant"
+        },
+        "local-var": {
+            "match": "[a-zA-Z][a-zA-Z0-9_@]*",
+            "name": "entity.name.variable"
+        },
+        "number": {
+            "match": "([0-9]+)|([0-9]*\\.[0-9]+)",
+            "name": "constant.numeric"
+        }
+    }
+}
