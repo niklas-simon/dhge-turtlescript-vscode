@@ -51,13 +51,15 @@
     ],
     "debuggers": [
       {
-        "type": "interpreter",
-        "label": "Interpreter Debug Mode",
-        "_program": "${configuration:turtlescript.debuggerPath}",
-        "program": "tee -a /mnt/c/Users/nikla/Desktop/projects/dhge-compilerbau/turtle/vscode",
+        "type": "turtlescript",
+        "label": "Turtlescript Debugger",
+        "program": "C:\\Users\\nikla\\Desktop\\projects\\dhge-turtlescript-vscode\\out\\debugAdapter.js",
+        "runtime": "node",
         "configurationAttributes": {
           "launch": {
-            "required": ["program"],
+            "required": [
+              "program"
+            ],
             "properties": {
               "program": {
                 "type": "string",
@@ -74,9 +76,9 @@
         },
         "initialConfigurations": [
           {
-            "type": "interpreter",
+            "type": "turtlescript",
             "request": "launch",
-            "name": "Ask for file name",
+            "name": "Debug Turtlescript File",
             "program": "${file}",
             "stopOnEntry": true
           }
@@ -86,16 +88,13 @@
             "label": "Turtlescript Debug: Launch",
             "description": "A new configuration for launching a turtlescript debug program",
             "body": {
-              "type": "interpreter",
+              "type": "turtlescript",
               "request": "launch",
               "name": "${2:Launch Program}",
               "program": "^\"\\${file}\""
             }
           }
-        ],
-        "variables": {
-          "AskForProgramName": "extension.turtlescript.getProgramName"
-        }
+        ]
       }
     ]
   },
@@ -108,14 +107,18 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.88.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.88.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.3.3",
     "@vscode/test-cli": "^0.0.8",
-    "@vscode/test-electron": "^2.3.9"
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@vscode/debugadapter": "^1.68.0",
+    "@vscode/debugprotocol": "^1.68.0"
   }
 }
