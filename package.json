@@ -2,7 +2,12 @@
   "name": "turtlescript",
   "displayName": "turtlescript",
   "description": "Syntax Highlighting for Turtlescript by Klaus Kusche",
-  "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/niklas-simon/dhge-turtlescript-vscode"
+  },
+  "publisher": "niklas-simon",
+  "icon": "./ressources/logo.png",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.88.0"
   },
@@ -104,7 +109,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "publish": "vsce package && vsce publish"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
