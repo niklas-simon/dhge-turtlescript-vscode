@@ -16,9 +16,10 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import { DebugAdapterDescriptorFactory } from './debugAdapterDescriptorFactory';
 
 export function activate(context: vscode.ExtensionContext) {
-	vscode.window.showInformationMessage("extension is running");
+	vscode.debug.registerDebugAdapterDescriptorFactory("turtlescript", new DebugAdapterDescriptorFactory());
 }
 
 export function deactivate() {

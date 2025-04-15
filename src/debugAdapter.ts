@@ -11,23 +11,24 @@ type LaunchRequest = DebugProtocol.LaunchRequest & {
 	}
 };
 
-type RestartRequest = DebugProtocol.RestartRequest & {
-	arguments: {
-		arguments: LaunchRequest["arguments"]
-	}
-};
+const logFile = "extdebug.log";
+const debugProg = process.env.DEBUGGER_PATH || "";
 
-const logFile = "C:\\Users\\nikla\\Desktop\\projects\\dhge-turtlescript-vscode\\out.log";
-const debugProg = "C:\\Users\\nikla\\Desktop\\projects\\dhge-compilerbau\\turtle\\turtle.exe";
 let debugProc: ChildProcess | null = null;
 
 let launchArgs: LaunchRequest["arguments"] | null = null;
 
 let seq = 1;
 
-fs.appendFileSync(logFile, "\r\n---\r\n");
-
 const log = (msg: string) => fs.appendFileSync(logFile, msg + "\r\n");
+
+log("\r\n---\r\n");
+
+if (!fs.existsSync(debugProg)) {
+	const error = `program ${debugProg} could not be found`;
+	log(error);
+	throw new Error(error);
+}
 
 const write = (res: DebugProtocol.Response | DebugProtocol.Event) => {
 	log(`sending:\r\n${JSON.stringify(res, null, 4)}\r\n`);

@@ -22,7 +22,7 @@
       "properties": {
         "turtlescript.debuggerPath": {
           "type": "string",
-          "default": "turtle",
+          "default": "turtle.exe",
           "description": "Path to debugger executeable"
         }
       }
@@ -53,7 +53,7 @@
       {
         "type": "turtlescript",
         "label": "Turtlescript Debugger",
-        "program": "C:\\Users\\nikla\\Desktop\\projects\\dhge-turtlescript-vscode\\out\\debugAdapter.js",
+        "program": "./out/debugAdapter.js",
         "runtime": "node",
         "configurationAttributes": {
           "launch": {
